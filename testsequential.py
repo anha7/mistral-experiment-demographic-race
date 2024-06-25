@@ -25,7 +25,7 @@ combined_questions = "\n".join(questions)
 
 # Prepare initial message and combined user questions
 messages = [
-    {"role": "user", "content": "You are taking the role of a college " + str(role) + " in an introductory computer science class. You are given the following evaluation and told to ONLY answer true or false to the questions. Therefore, do NOT explain your answer choice. Simply provide the correct answer."},
+    {"role": "user", "content": "You are taking the role of a college " + str(role) + " in an introductory computer science class. You are given the following evaluation and told to ONLY answer true or false to these 10 questions. Therefore, do NOT explain your answer choice. Simply provide the correct answer."},
     {"role": "assistant", "content": "Sure, I will only provide the correct answers. What questions do you have?"},
     {"role": "user", "content": combined_questions}
 ]
