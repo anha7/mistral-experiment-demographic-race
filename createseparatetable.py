@@ -12,14 +12,14 @@ file_paths = [
 questions = [
 	'true or false: In Java, every variable has a type (such as int, double, or String) that is known at compile time.',
 	'true or false: In Java, the result of applying one of the arithmetic operators (+, -, *, or /) to two double operands always evaluates to a value of type double (and never produces a run-time exception).',
-	'true or false: In Java, if you attempt to use a local variable of type int in an expression before that variable has been assigned a value, Java will substitute the value 0.'
-	'true or false: In Java, if a variable is declared and initialized in the body of a for loop, that variable cannot be accessed outside that loop.'
-	'true or false: In Java, if you name a variable with all uppercase letters and initialize it to some value, attempting to subsequently change its value would lead to a compile-time error.'
-	'true or false: In Java, after you create and initialize an int[] array, you cannot change its length.'
-	'true or false: In Java, if a[] is an array of type char[] and length 10, then a[0.0] is a valid expression that gives its first element.'
-	'true or false: In Java, it is possible to declare, create, and initialize a String[] array without using the keyword new.'
-	'true or false: In Java, if a[] and b[] are two different arrays of the same type and length, then the expression (a == b) evaluates to true if the corresponding array elements are equal, and false otherwise.'
-	'true or false: In Java, the elements of an array of type int[] are stored contiguously in the computer’s memory (i.e., in consecutive memory locations).'
+	''
+	''
+	''
+	''
+	''
+	''
+	''
+	''
 ]
 
 # Define correct answers
