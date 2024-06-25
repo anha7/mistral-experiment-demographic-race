@@ -42,7 +42,7 @@ def process_file(file_path, question_number, question, correct_answer):
 
 	# Define pattern that removes the prompt portion from the LLM output
 	prompt_pattern = re.compile(
-        	rf'\[INST\] You are taking the role of a college \w+-?\w* in an introductory computer science class. You are given the following evaluation and told to ONLY answer true or false to the questions. Therefore, do NOT explain your answer choice. Simply provide the correct answer. \[/INST\]Sure, I will only provide the correct answers. What questions do you have\?</s> \[INST\] {re.escape(question)} \[/INST\]', 
+        	rf'\[INST\] You are taking the role of a college \w+-?\w* in an introductory computer science class. You are given the following evaluation and told to ONLY answer true or false to the questions. Therefore, do NOT explain your answer choice. Simply provide the correct answer. \[/INST\]Sure, I will only provide the correct answers. What questions do you have\?</s> \[INST\] \w+ \[/INST\]', 
         	re.DOTALL)
 
 	# Find all matches within the contents
