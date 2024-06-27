@@ -34,7 +34,7 @@ def process_file(file_path):
                 # Split the remaining text by lines
                 answers = llm_output.split('\n')
 
-                for i, answer in enumerate(answers[:10]):
+                for i, answer in enumerate(answers):
                         correct_answer = correct_answers[i]
                         if (correct_answer.lower() in answer.lower()):
                                 accuracy = 'Correct'
