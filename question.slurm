@@ -15,4 +15,4 @@ module load anaconda3/2024.2
 conda activate /home/ak3987/.conda/envs/mixtral_env
 cd /scratch/network/ak3987/mixtral_testing
 
-python testsequential.py professor 2.0 10 >> output_file_sequential_2
+python testsequential.py professor 2.0 10 >> output_file_sequential

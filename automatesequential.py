@@ -3,10 +3,10 @@ import subprocess
 import sys
 
 # Get question and  output file
-output_file_sequential_2 = "combined_outputs.txt"
+output_file_sequential = "combined_outputs.txt"
 
 # Ensure the common output file is empty at the start
-with open(output_file_sequential_2, "w") as f:
+with open(output_file_sequential, "w") as f:
 	f.write("")
 
 # Create a list for roles
@@ -37,7 +37,7 @@ module load anaconda3/2024.2
 conda activate /home/ak3987/.conda/envs/mixtral_env
 cd /scratch/network/ak3987/mixtral_testing
 
-python testsequential.py {role} {temperature} {i} >> output_file_sequential_2"""
+python testsequential.py {role} {temperature} {i} >> output_file_sequential"""
 
 			# Write SLURM script to a file
 			slurm_filename = f"question.slurm"

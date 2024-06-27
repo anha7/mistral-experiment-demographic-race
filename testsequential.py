@@ -41,8 +41,12 @@ model.to(device)
 generated_ids = model.generate(model_inputs, max_new_tokens=1000, do_sample=True)
 
 # Decode responses
-decoded = tokenizer.batch_decode(generated_ids, legacy=False)
+decoded = tokenizer.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True)[0]
+
+# Extract only the assistant's response
+start_index = decoded.find("True or false: In Java, the elements of an array of type int[] are stored contiguously in the computer’s memory (i.e., in consecutive memory locations).") + len("True or false: In Java, the elements of an array of type int[] are stored contiguously in the computer’s memory (i.e., in consecutive memory locations).")
+response = decoded[start_index:].strip()
 
 # Print the response
 print(f"Repetition: {repetition}, Role: {role}, Temperature: {temperature}")
-print(f"Response: {decoded[0]}\n\n\n")
+print(f"Response: {response}\n\n\n")
