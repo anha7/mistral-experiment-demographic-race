@@ -17,7 +17,7 @@ def process_file(file_path):
                 content = file.read()
 
         # Define pattern to recognize each repetition block
-        entry_pattern = re.compile(r'Repetition:\s*(\d+),\s*Role:\s*(\w+-?\w*),\s*Temperature:\s*([\d.]+).*?Response:\s*<s>(.*?)\.</s>', re.DOTALL | re.MULTILINE)
+        entry_pattern = re.compile(r'Repetition:\s*(\d+),\s*Role:\s*(\w+-?\w*),\s*Temperature:\s*([\d.]+).*?Response:\s*\[\/INST\](.*?)\n\n', re.DOTALL)
         matches = entry_pattern.findall(content)
 
         # Process each repetition block
@@ -27,12 +27,9 @@ def process_file(file_path):
                 temperature = float(match[2])
                 llm_output = match[3].strip()
 
-                # Remove unwanted text pattern
-                pattern = re.compile(r'Response: [\INST]', re.DOTALL)
-                llm_output = pattern.sub('', llm_output).strip()
-
                 # Split the remaining text by lines
-                answers = llm_output.split('\n')
+                answers = re.split(r'\n+', llm_output)
+                answers = [a.strip() for a in answers if a.strip()]
 
                 for i, answer in enumerate(answers):
                         correct_answer = correct_answers[i]
