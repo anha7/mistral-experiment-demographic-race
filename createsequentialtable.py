@@ -17,7 +17,7 @@ def process_file(file_path):
                 content = file.read()
 
         # Define pattern to recognize each repetition block
-        entry_pattern = re.compile(r'Repetition:\s*(\d+),\s*Role:\s*(\w+-?\w*),\s*Temperature:\s*([\d.]+).*?Response:\s*<s>(.*?)</s>', re.DOTALL)
+        entry_pattern = re.compile(r'Repetition:\s*(\d+),\s*Role:\s*(\w+-?\w*),\s*Temperature:\s*([\d.]+).*?Response:\s*<s>(.*?)\.</s>', re.DOTALL)
         matches = entry_pattern.findall(content)
 
         for match in matches:
