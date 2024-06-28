@@ -11,10 +11,11 @@ saved_dir = os.path.join("/scratch/network/ak3987/.cache/saved_models", model_id
 model = AutoModelForCausalLM.from_pretrained(saved_dir)
 
 # Read command-line arguments
-question = sys.argv[1]
-role = sys.argv[2]
-temperature = float(sys.argv[3])
-repetition = sys.argv[4]
+question_number = sys.argv[1]
+question = sys.argv[2]
+role = sys.argv[3]
+temperature = float(sys.argv[4])
+repetition = sys.argv[5]
 
 # Prepare initial message and combined user questions
 messages = [
@@ -34,9 +35,13 @@ model.to(device)
 generated_ids = model.generate(model_inputs, max_new_tokens=1000, do_sample=True)
 
 # Decode responses
-decoded = tokenizer.batch_decode(generated_ids, legacy=False)
+decoded = tokenizer.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True)[0]
+
+# Extract only the assistant's response
+start_index = decoded.find(question) + len(question)
+response = decoded[start_index:].strip()
 
 # Print the response
-print(f"Repetition: {repetition}, Role: {role}, Temperature: {temperature}")
-print(f"Response: {decoded[0]}\n\n\n")
+print(f"Question: {question_number}, Repetition: {repetition}, Role: {role}, Temperature: {temperature}")
+print(f"Response: {response}\n\n\n")
 

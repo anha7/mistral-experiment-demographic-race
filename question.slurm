@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=sequential_professor_2.0_10
+#SBATCH --job-name=10_professor_2.0_10
 #SBATCH --output=output.txt
 #SBATCH --error=error.txt
 #SBATCH --nodes=1
@@ -15,4 +15,4 @@ module load anaconda3/2024.2
 conda activate /home/ak3987/.conda/envs/mixtral_env
 cd /scratch/network/ak3987/mixtral_testing
 
-python testsequential.py professor 2.0 10 >> output_file_sequential
+python testseparate.py 10 "True or false: In Java, the elements of an array of type int[] are stored contiguously in the computer’s memory (i.e., in consecutive memory locations)." professor 2.0 10 >> output_file_separate
