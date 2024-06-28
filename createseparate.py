@@ -5,7 +5,7 @@ import pandas as pd
 file_path = "output_file_separate.txt"
 
 # Define correct answers
-correct_answers = ['True.', 'True.', 'False.', 'True.', 'False.', 'True.', 'False.', 'True.', 'False.', 'True.']
+correct_answers = ['True', 'True', 'False', 'True', 'False', 'True', 'False', 'True', 'False', 'True']
 
 # Initialize data store
 data = []
@@ -18,7 +18,7 @@ def process_file(file_path):
 
 	# Define patterns to recognize the repetition number, role, temperature, and LLM response
 	entry_pattern = re.compile(
-        	r'Question:\s*(\d+),\s*Repetition:\s*(\d+),\s*Role:\s*(\w+-?\w*),\s*Temperature:\s*([\d.]+).*?Response:\s*<s>(.*?)\.</s>',
+        	r'Question:\s*(\d+),\s*Repetition:\s*(\d+),\s*Role:\s*(\w+-?\w*),\s*Temperature:\s*([\d.]+).*?Response:\s*\[\/INST\]\s*(.*?)\.',
 	        re.DOTALL)
 
 	# Find all matches within the contents
