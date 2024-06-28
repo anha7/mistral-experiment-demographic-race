@@ -17,7 +17,7 @@ def process_file(file_path):
                 content = file.read()
 
         # Define pattern to recognize each repetition block
-        entry_pattern = re.compile(r'Repetition:\s*(\d+),\s*Role:\s*(\w+-?\w*),\s*Temperature:\s*([\d.]+).*?Response:\s*\[\/INST\](.*?)\n\n', re.DOTALL)
+        entry_pattern = re.compile(r'Question:\s*(\d+),\s*Repetition:\s*(\d+),\s*Role:\s*(\w+-?\w*),\s*Temperature:\s*([\d.]+)\s*Response:\s*\[\/INST\]\s*(.*?)\s*(?=(Question:|$))', re.DOTALL)
         matches = entry_pattern.findall(content)
 
         # Process each repetition block
@@ -31,7 +31,7 @@ def process_file(file_path):
                 answers = re.split(r'\n+', llm_output)
                 answers = [a.strip() for a in answers if a.strip()]
 
-                for i, answer in enumerate(answers):
+                for i, answer in enumerate(answers[:10]):
                         correct_answer = correct_answers[i]
                         if (correct_answer.lower() in answer.lower()):
                                 accuracy = 'Correct'
