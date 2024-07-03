@@ -41,7 +41,7 @@ accuracy_per_temp_sequential, std_per_temp_sequential = calc_group_accuracy_and_
 
 # Function that plots overall accuracy and standard deviations
 def plot_overall_accuracy(overall, separate, sequential, filename):
-	plt.figure(figsize=(10, 6))
+	plt.figure(figsize=(14, 7))
 	plt.bar(['Combined', 'Separate', 'Sequential'], [overall[0], separate[0], sequential[0]],
 		yerr=[overall[1], separate[1], sequential[1]], capsize=5)
 	plt.ylabel('Mean Accuracy')
@@ -73,14 +73,14 @@ def plot_group_accuracy(accuracy_combined, std_combined, accuracy_separate, std_
 # Function that plots mean accuracy and standard deviation per question per group
 def plot_accuracy_per_question_group(df_combined, df_separate, df_sequential, group):
 	group_entries = df_combined[group].unique()
-	questions = df_combined['Question Number'].unique()
 
+	# Create a plot for every category within the group
 	for entry in group_entries:
 		accuracy_combined, std_combined = calc_group_accuracy_and_std(df_combined[df_combined[group] == entry], 'Question Number')
 		accuracy_separate, std_separate = calc_group_accuracy_and_std(df_separate[df_separate[group] == entry], 'Question Number')
 		accuracy_sequential, std_sequential = calc_group_accuracy_and_std(df_sequential[df_sequential[group] == entry], 'Question Number')
 
-		plot_group_accuracy(accuracy_combined, std_combined, accuracy_separate, std_separate, accuracy_sequential, std_sequential, f'Question Number ({group}: {entry})', f'plot_{group}_{entry}.png')
+		plot_group_accuracy(accuracy_combined, std_combined, accuracy_separate, std_separate, accuracy_sequential, std_sequential, f'Question w.r.t. {group} {entry}', f'accuracy_{entry}.png')
 
 # Plot overall mean accuracy and standard deviation
 plot_overall_accuracy(
