@@ -106,7 +106,7 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, df_separate, df_se
 	for i in range(num_groups):
 		ax.bar(x[i::num_groups * 3] - width/2, combined_means[i], width, label=f'Combined, {group_name} {group_entries[i]}', yerr=combined_stds[i], capsize=5)
 		ax.bar(x[i::num_groups * 3] + width/2, separate_means[i], width, label=f'Separate, {group_name} {group_entries[i]}', yerr=separate_stds[i], capsize=5)
-		ax.bar(x[i::num_groups * 3] + width/2, sequential_means[i], width, label=f'Sequential, {group_name} {group_entries[i]}', yerr=sequential_stds[i], capsize=5)
+		ax.bar(x[i::num_groups * 3] + 3*width/2, sequential_means[i], width, label=f'Sequential, {group_name} {group_entries[i]}', yerr=sequential_stds[i], capsize=5)
 
 	ax.set_xlabel('Question Number')
 	ax.set_ylabel('Mean and Standard Deviation')
