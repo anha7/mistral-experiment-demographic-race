@@ -29,15 +29,10 @@ mean_per_question_combined, std_per_question_combined = calc_group_accuracy_and_
 mean_per_question_separate, std_per_question_separate = calc_group_accuracy_and_std(separate_table, 'Question Number')
 mean_per_question_sequential, std_per_question_sequential = calc_group_accuracy_and_std(sequential_table, 'Question Number')
 
-# Calculate per role metrics
-mean_per_role_combined, std_per_role_combined = calc_group_accuracy_and_std(combined_table, 'Role')
-mean_per_role_separate, std_per_role_separate = calc_group_accuracy_and_std(separate_table, 'Role')
-mean_per_role_sequential, std_per_role_sequential = calc_group_accuracy_and_std(sequential_table, 'Role')
-
-# Calculate per temperature metrics
-mean_per_temp_combined, std_per_temp_combined = calc_group_accuracy_and_std(combined_table, 'Temperature')
-mean_per_temp_separate, std_per_temp_separate = calc_group_accuracy_and_std(separate_table, 'Temperature')
-mean_per_temp_sequential, std_per_temp_sequential = calc_group_accuracy_and_std(sequential_table, 'Temperature')
+# Calculate per gender metrics
+mean_per_gender_combined, std_per_gender_combined = calc_group_accuracy_and_std(combined_table, 'Gender')
+mean_per_gender_separate, std_per_gender_separate = calc_group_accuracy_and_std(separate_table, 'Gender')
+mean_per_gender_sequential, std_per_gender_sequential = calc_group_accuracy_and_std(sequential_table, 'Gender')
 
 # Function that plots overall accuracy and standard deviations
 def plot_overall_mean_and_std_dev(overall, separate, sequential, filename):
@@ -77,26 +72,16 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, df_separate, df_se
 
 	combined_means = []
 	combined_stds = []
-	separate_means = []
-	separate_stds = []
-	sequential_means = []
-	sequential_stds = []
 
 	for entry in group_entries:
 		combined_mean, combined_std = calc_group_accuracy_and_std(df_combined[df_combined[group_name] == entry], 'Question Number')
-		separate_mean, separate_std = calc_group_accuracy_and_std(df_separate[df_separate[group_name] == entry], 'Question Number')
-		sequential_mean, sequential_std = calc_group_accuracy_and_std(df_sequential[df_sequential[group_name] == entry], 'Question Number')
 
 		combined_means.append(combined_mean)
 		combined_stds.append(combined_std)
-		separate_means.append(separate_mean)
-		separate_stds.append(separate_std)
-		sequential_means.append(sequential_mean)
-		sequential_stds.append(sequential_std)
 
 	num_questions = len(questions)
 	num_groups = len(group_entries)
-	total_bars = num_questions * num_groups * 3
+	total_bars = num_questions * num_groups
 
 	x = np.arange(total_bars)
 	width = 0.25
@@ -104,14 +89,11 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, df_separate, df_se
 	fig, ax = plt.subplots(figsize=(30, 15))
 
 	for i in range(num_groups):
-		ax.bar(x[i::num_groups * 3] - width/2, combined_means[i], width, label=f'Combined, {group_name} {group_entries[i]}', yerr=combined_stds[i], capsize=5)
-		ax.bar(x[i::num_groups * 3] + width/2, separate_means[i], width, label=f'Separate, {group_name} {group_entries[i]}', yerr=separate_stds[i], capsize=5)
-		ax.bar(x[i::num_groups * 3] + 3*width/2, sequential_means[i], width, label=f'Sequential, {group_name} {group_entries[i]}', yerr=sequential_stds[i], capsize=5)
+		ax.bar(x[i::num_groups], combined_means[i], width, label=f'Combined, {group_name} {group_entries[i]}', yerr=combined_stds[i], capsize=5)
 
 	ax.set_xlabel('Question Number')
 	ax.set_ylabel('Mean and Standard Deviation')
 	ax.set_title(f'Mean and Standard Deviation per Question per {group_name}')
-	ax.set_xticks(x[num_groups * 3 // 2::num_groups * 3])
 	ax.set_xticklabels([f'Q{q}' for q in questions], rotation=90)
 	ax.legend()
 
@@ -136,38 +118,20 @@ plot_mean_and_std_dev_per_group(
 	'mean_and_std_dev_per_question.png'
 )
 
-# Plot mean accuracy and standard deviation per role
+# Plot mean accuracy and standard deviation per gender
 plot_mean_and_std_dev_per_group(
-	mean_per_role_combined, std_per_role_combined,
-	mean_per_role_separate, std_per_role_separate,
-	mean_per_role_sequential, std_per_role_sequential,
-	'Role',
-	'mean_and_std_dev_per_role.png'
+	mean_per_gender_combined, std_per_gender_combined,
+	mean_per_gender_separate, std_per_gender_separate,
+	mean_per_gender_sequential, std_per_gender_sequential,
+	'Gender',
+	'mean_and_std_dev_per_gender.png'
 )
 
-# Plot mean accuracy and standard deviation per temperature
-plot_mean_and_std_dev_per_group(
-	mean_per_temp_combined, std_per_temp_combined,
-	mean_per_temp_separate, std_per_temp_separate,
-	mean_per_temp_sequential, std_per_temp_sequential,
-	'Temperature',
-	'mean_and_std_dev_per_temperature.png'
-)
-
-# Plot mean accuracies and  std devs for every individual question per role
+# Plot mean accuracies and std devs for every individual question per gender
 plot_mean_and_std_dev_per_question_per_group(
 	combined_table,
 	separate_table,
 	sequential_table,
-	'Role',
-	'mean_and_std_dev_per_question_per_role.png'
-)
-
-# Plot mean accuracies and std devs for every individual question per temperature
-plot_mean_and_std_dev_per_question_per_group(
-	combined_table,
-	separate_table,
-	sequential_table,
-	'Temperature',
-	'mean_and_std_dev_per_question_per_temperature.png'
+	'Gender',
+	'mean_and_std_dev_per_question_per_gender.png'
 )

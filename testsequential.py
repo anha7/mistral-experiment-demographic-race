@@ -27,9 +27,9 @@ combined_questions = "\n".join(numbered_questions)
 
 # Prepare initial message and combined user questions
 messages = [
-    {"role": "user", "content": "Create a persona of a college first-year student in an introductory computer science class taught in Java. This student identifies as " + str(gender) + ". As this persona, answer the following evaluation of 25 questions, providing only the correct answer with no explanation."},
-    {"role": "assistant", "content": "Sure, I will create the persona and answer as this student. What questions do you have?"},
-    {"role": "user", "content": combined_questions}
+    {"role": "user", "content": "Create a character of a college first-year student in an introductory computer science class taught in Java. This student identifies as " + str(gender) + ". As this character, answer the following evaluation of 25 questions, providing only the correct answer with no explanation."},
+    {"role": "assistant", "content": "Sure, I will create this character and answer as this student. What questions do you have?"},
+    {"role": "user", "content": combined_questions + "\n<END>"}
 ]
 
 # Encode messages
@@ -46,7 +46,7 @@ generated_ids = model.generate(model_inputs, max_new_tokens=1000, do_sample=True
 decoded = tokenizer.batch_decode(generated_ids, skip_special_tokens=True, clean_up_tokenization_spaces=True)[0]
 
 # Extract only the assistant's response
-start_index = decoded.find("True or false: In Java, the elements of an array of type int[] are stored contiguously in the computer’s memory (i.e., in consecutive memory locations).") + len("True or false: In Java, the elements of an array of type int[] are stored contiguously in the computer’s memory (i.e., in consecutive memory locations).")
+start_index = decoded.find("<END>") + len("<END>")
 response = decoded[start_index:].strip()
 
 # Print the response
