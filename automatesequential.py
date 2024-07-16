@@ -24,7 +24,7 @@ for gender in gender_list:
 module purge
 module load anaconda3/2024.2
 conda activate /home/ak3987/.conda/envs/mixtral_env
-cd /scratch/network/ak3987/mixtral_testing
+cd /scratch/network/ak3987/mixtral_experiment_demographic_gender
 
 python testsequential.py {gender} {i} >> sequential_ouputs.txt"""
 
