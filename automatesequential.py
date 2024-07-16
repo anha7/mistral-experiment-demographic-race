@@ -3,7 +3,7 @@ import subprocess
 import sys
 
 # Create a list for gender identities
-gender_list = ["female", "male", "non-binary", "genderfluid", "genderqueer"]
+gender_list = ["cisgender-woman", "cisgender-man", "transgender-woman", "transgender-man", "non-binary", "genderfluid", "genderqueer"]
 
 # Submit SLURM jobs
 for gender in gender_list:

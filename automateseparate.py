@@ -9,11 +9,11 @@ with open(question_file, "r") as file:
 	questions = [line.strip() for line in file.readlines()]
 
 # Create a list for gender identities
-gender_list = ["female", "male", "non-binary", "genderfluid", "genderqueer"]
+gender_list = ["cisgender-woman", "cisgender-man", "transgender-woman", "transgender-man", "non-binary", "genderfluid", "genderqueer"]
 
 # Submit SLURM jobs
-for i, question in enumerate(questions):
-	for gender in gender_list:		
+for gender in gender_list:
+	for i, question in enumerate(questions):		
 		for j in range(1, 11):
 			# Create a unique SLURM script for each question
 			slurm_script = f"""#!/bin/bash

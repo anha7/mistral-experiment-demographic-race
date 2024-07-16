@@ -7,7 +7,7 @@ file_path = 'output_file_sequential.txt'
 # Define correct answers
 correct_answers = [
 	"2.0",
-	"2.0",
+        "2.0",
 	"1",
 	"compile-time error or run-time exception",
 	"true",

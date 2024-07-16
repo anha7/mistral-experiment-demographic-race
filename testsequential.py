@@ -27,8 +27,8 @@ combined_questions = "\n".join(numbered_questions)
 
 # Prepare initial message and combined user questions
 messages = [
-    {"role": "user", "content": ""},
-    {"role": "assistant", "content": "Sure, I will only provide the correct answers. What questions do you have?"},
+    {"role": "user", "content": "Create a persona of a college first-year student in an introductory computer science class taught in Java. This student identifies as " + str(gender) + ". As this persona, answer the following evaluation of 25 questions, providing only the correct answer with no explanation."},
+    {"role": "assistant", "content": "Sure, I will create the persona and answer as this student. What questions do you have?"},
     {"role": "user", "content": combined_questions}
 ]
 
