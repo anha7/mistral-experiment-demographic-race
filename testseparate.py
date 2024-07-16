@@ -14,7 +14,7 @@ model = AutoModelForCausalLM.from_pretrained(saved_dir)
 question_number = sys.argv[1]
 question = sys.argv[2]
 gender = sys.argv[3]
-repetition = int(sys.argv[5])
+repetition = int(sys.argv[4])
 
 # Prepare initial message and combined user questions
 messages = [

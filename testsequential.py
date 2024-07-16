@@ -12,8 +12,8 @@ model = AutoModelForCausalLM.from_pretrained(saved_dir)
 
 # Read command-line arguments
 question_file = "fall2022questions.txt"
-gender = sys.argv[0]
-repetition = int(sys.argv[1])
+gender = sys.argv[1]
+repetition = int(sys.argv[2])
 
 # Retrieve questions list
 with open(question_file, "r") as file:
