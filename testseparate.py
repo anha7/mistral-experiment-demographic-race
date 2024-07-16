@@ -11,7 +11,7 @@ saved_dir = os.path.join("/scratch/network/ak3987/.cache/saved_models", model_id
 model = AutoModelForCausalLM.from_pretrained(saved_dir)
 
 # Read command-line arguments
-question_number = sys.argv[1]
+question_number = int(sys.argv[1])
 question = sys.argv[2]
 gender = sys.argv[3]
 repetition = int(sys.argv[4])

@@ -17,7 +17,7 @@ for gender in gender_list:
 		for j in range(1, 11):
 			# Create a unique SLURM script for each question
 			slurm_script = f"""#!/bin/bash
-#SBATCH --job-name=sep_{i}_{gender}_{j}
+#SBATCH --job-name=sep_{i+1}_{gender}_{j}
 #SBATCH --output=output.txt
 #SBATCH --error=error.txt
 #SBATCH --nodes=1
@@ -33,7 +33,7 @@ module load anaconda3/2024.2
 conda activate /home/ak3987/.conda/envs/mixtral_env
 cd /scratch/network/ak3987/mixtral_experiment_demographic_gender
 
-python testseparate.py {i} "{question}" {gender} {j} >> separate_outputs.txt"""
+python testseparate.py {i+1} "{question}" {gender} {j} >> separate_outputs.txt"""
 
 			# Write SLURM script to a file
 			slurm_filename = f"question.slurm"
