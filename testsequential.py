@@ -12,20 +12,22 @@ model = AutoModelForCausalLM.from_pretrained(saved_dir)
 
 # Read command-line arguments
 question_file = "fall2022questions.txt"
-role = sys.argv[1]
-temperature = float(sys.argv[2])
-repetition = sys.argv[3]
+gender = sys.argv[0]
+repetition = int(sys.argv[1])
 
 # Retrieve questions list
 with open(question_file, "r") as file:
 	questions = [line.strip() for line in file.readlines()]
+	
+# Create a new list with numbered lines
+numbered_questions = [f"{i+1}. {question}" for i, question in enumerate(questions)]
 
-# Combine questions list into one entity
-combined_questions = "\n".join(questions)
+# Combine numbered questions list into one entity
+combined_questions = "\n".join(numbered_questions)
 
 # Prepare initial message and combined user questions
 messages = [
-    {"role": "user", "content": "You are taking the role of a college " + str(role) + " in an introductory computer science class. You are given the following evaluation and told to ONLY answer true or false to these 10 questions. Therefore, do NOT explain your answer choice. Simply provide the correct answer."},
+    {"role": "user", "content": ""},
     {"role": "assistant", "content": "Sure, I will only provide the correct answers. What questions do you have?"},
     {"role": "user", "content": combined_questions}
 ]
@@ -48,5 +50,5 @@ start_index = decoded.find("True or false: In Java, the elements of an array of 
 response = decoded[start_index:].strip()
 
 # Print the response
-print(f"Repetition: {repetition}, Role: {role}, Temperature: {temperature}")
+print(f"Repetition: {repetition}, Gender: {gender}")
 print(f"Response: {response}\n\n\n")

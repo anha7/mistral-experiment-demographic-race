@@ -2,26 +2,15 @@ import os
 import subprocess
 import sys
 
-# Get question and  output file
-output_file_sequential = "combined_outputs.txt"
-
-# Ensure the common output file is empty at the start
-with open(output_file_sequential, "w") as f:
-	f.write("")
-
-# Create a list for roles
-role_list = ["first-year", "senior", "professor"]
-
-# Create a list for temperatures
-temperature_list = [0.0, 1.0, 2.0] 
+# Create a list for gender identities
+gender_list = ["female", "male", "non-binary", "genderfluid", "genderqueer"]
 
 # Submit SLURM jobs
-for role in role_list:
-	for temperature in temperature_list:
-		for i in range(1, 11):
-			# Create a unique SLURM script for each question
-			slurm_script = f"""#!/bin/bash
-#SBATCH --job-name=sequential_{role}_{temperature}_{i}
+for gender in gender_list:
+	for i in range(1, 11):
+		# Create a unique SLURM script for each question
+		slurm_script = f"""#!/bin/bash
+#SBATCH --job-name=seq_{gender}_{i}
 #SBATCH --output=output.txt
 #SBATCH --error=error.txt
 #SBATCH --nodes=1
@@ -37,12 +26,12 @@ module load anaconda3/2024.2
 conda activate /home/ak3987/.conda/envs/mixtral_env
 cd /scratch/network/ak3987/mixtral_testing
 
-python testsequential.py {role} {temperature} {i} >> output_file_sequential"""
+python testsequential.py {gender} {i} >> sequential_ouputs.txt"""
 
-			# Write SLURM script to a file
-			slurm_filename = f"question.slurm"
-			with open(slurm_filename, "w") as slurm_file:
-				slurm_file.write(slurm_script)
+		# Write SLURM script to a file
+		slurm_filename = f"question.slurm"
+		with open(slurm_filename, "w") as slurm_file:
+			slurm_file.write(slurm_script)
 
-			# Submit SLURM job
-			subprocess.run(["sbatch", slurm_filename])
+		# Submit SLURM job
+		subprocess.run(["sbatch", slurm_filename])

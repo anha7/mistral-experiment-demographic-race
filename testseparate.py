@@ -13,13 +13,12 @@ model = AutoModelForCausalLM.from_pretrained(saved_dir)
 # Read command-line arguments
 question_number = sys.argv[1]
 question = sys.argv[2]
-role = sys.argv[3]
-temperature = float(sys.argv[4])
-repetition = sys.argv[5]
+gender = sys.argv[3]
+repetition = int(sys.argv[5])
 
 # Prepare initial message and combined user questions
 messages = [
-    {"role": "user", "content": "You are taking the role of a college " + str(role) + " in an introductory computer science class. You are given the following evaluation and told to ONLY answer true or false to the questions. Therefore, do NOT explain your answer choice. Simply provide the correct answer."},
+    {"role": "user", "content": ""},
     {"role": "assistant", "content": "Sure, I will only provide the correct answers. What questions do you have?"},
     {"role": "user", "content": question}
 ]
@@ -42,6 +41,6 @@ start_index = decoded.find(question) + len(question)
 response = decoded[start_index:].strip()
 
 # Print the response
-print(f"Question: {question_number}, Repetition: {repetition}, Role: {role}, Temperature: {temperature}")
+print(f"Question: {question_number}, Repetition: {repetition}, Gender: {gender}")
 print(f"Response: {response}\n\n\n")
 
