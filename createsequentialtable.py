@@ -56,7 +56,7 @@ def process_file(file_path):
                 answers = re.split(r'\n+', llm_output)
                 answers = [a.strip() for a in answers if a.strip()]
 
-                for i, answer in enumerate(answers[:10]):
+                for i, answer in enumerate(answers[:25]):
                         correct_answer = correct_answers[i]
                         if (correct_answer.lower() in answer.lower()):
                                 accuracy = 'Correct'
