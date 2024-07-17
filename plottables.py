@@ -132,8 +132,6 @@ plot_mean_and_std_dev_per_group(
 # Plot mean accuracies and std devs for every individual question per gender
 plot_mean_and_std_dev_per_question_per_group(
 	combined_table,
-	separate_table,
-	sequential_table,
 	'Gender',
 	'mean_and_std_dev_per_question_per_gender.png'
 )
