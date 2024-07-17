@@ -32,7 +32,7 @@ module load anaconda3/2024.2
 conda activate /home/ak3987/.conda/envs/mixtral_env
 cd /scratch/network/ak3987/mixtral_experiment_demographic_race
 
-python testseparate.py {i+1} "{question}" {race} {j} >> separate_outputs.txt"""
+python testseparate.py {i+1} "{question}" "{race}" {j} >> separate_outputs.txt"""
 
 			# Write SLURM script to a file
 			slurm_filename = f"question.slurm"
