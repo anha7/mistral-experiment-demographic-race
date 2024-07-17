@@ -76,7 +76,6 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, group_name, filena
 
     for entry in group_entries:
         combined_mean, combined_std = calc_group_accuracy_and_std(df_combined[df_combined[group_name] == entry], 'Question Number')
-
         combined_means.append(combined_mean)
         combined_stds.append(combined_std)
 
@@ -84,20 +83,20 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, group_name, filena
     num_groups = len(group_entries)
 
     x = np.arange(num_questions)
-    width = 0.2  # Adjusted width for better spacing
+    width = 0.1  # Adjusted width for better spacing
 
-    fig, ax = plt.subplots(figsize=(40, 20))  # Increased figure size
+    fig, ax = plt.subplots(figsize=(60, 30))  # Increased figure size
 
     for i in range(num_groups):
         offset = i * width
-        ax.bar(x + offset, combined_means[i], width, label=f'Combined, {group_name} {group_entries[i]}', yerr=combined_stds[i], capsize=5)
+        ax.bar(x + offset, combined_means[i], width, label=f'{group_entries[i]}', yerr=combined_stds[i], capsize=5)
 
     ax.set_xlabel('Question Number', fontsize=20)
     ax.set_ylabel('Mean Accuracy', fontsize=20)
-    ax.set_title(f'Mean and Standard Deviation per Question per {group_name}', fontsize=24)
+    ax.set_title(f'Mean Accuracy of Responses by Gender Identity for Each Question', fontsize=30)
     ax.set_xticks(x + width * (num_groups - 1) / 2)
-    ax.set_xticklabels([f'Q{q}' for q in questions], rotation=90, fontsize=18)
-    ax.legend(fontsize=16)
+    ax.set_xticklabels([f'Q{q}' for q in questions], rotation=90, fontsize=20)
+    ax.legend(title="Gender Identity", fontsize=20)
 
     fig.tight_layout()
     plt.savefig(filename)
