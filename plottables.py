@@ -66,40 +66,42 @@ def plot_mean_and_std_dev_per_group(mean_combined, std_combined, mean_separate, 
 	plt.close()
 
 # Function that plots mean accuracy and standard deviation per question per group
-def plot_mean_and_std_dev_per_question_per_group(df_combined, df_separate, df_sequential, group_name, filename):
-	group_entries = df_combined[group_name].unique()
-	questions = df_combined['Question Number'].unique()
+def plot_mean_and_std_dev_per_question_per_group(df_combined, group_name, filename):
+    group_entries = df_combined[group_name].unique()
+    questions = df_combined['Question Number'].unique()
 
-	combined_means = []
-	combined_stds = []
+    combined_means = []
+    combined_stds = []
 
-	for entry in group_entries:
-		combined_mean, combined_std = calc_group_accuracy_and_std(df_combined[df_combined[group_name] == entry], 'Question Number')
+    for entry in group_entries:
+        combined_mean, combined_std = calc_group_accuracy_and_std(df_combined[df_combined[group_name] == entry], 'Question Number')
 
-		combined_means.append(combined_mean)
-		combined_stds.append(combined_std)
+        combined_means.append(combined_mean)
+        combined_stds.append(combined_std)
 
-	num_questions = len(questions)
-	num_groups = len(group_entries)
-	total_bars = num_questions * num_groups
+    num_questions = len(questions)
+    num_groups = len(group_entries)
+    total_bars = num_questions
 
-	x = np.arange(total_bars)
-	width = 0.25
+    x = np.arange(total_bars)
+    width = 0.25
 
-	fig, ax = plt.subplots(figsize=(30, 15))
+    fig, ax = plt.subplots(figsize=(30, 15))
 
-	for i in range(num_groups):
-		ax.bar(x[i::num_groups], combined_means[i], width, label=f'Combined, {group_name} {group_entries[i]}', yerr=combined_stds[i], capsize=5)
+    for i in range(num_groups):
+        offset = i * width
+        ax.bar(x + offset, combined_means[i], width, label=f'Combined, {group_name} {group_entries[i]}', yerr=combined_stds[i], capsize=5)
 
-	ax.set_xlabel('Question Number')
-	ax.set_ylabel('Mean and Standard Deviation')
-	ax.set_title(f'Mean and Standard Deviation per Question per {group_name}')
-	ax.set_xticklabels([f'Q{q}' for q in questions], rotation=90)
-	ax.legend()
+    ax.set_xlabel('Question Number')
+    ax.set_ylabel('Mean Accuracy')
+    ax.set_title(f'Mean and Standard Deviation per Question per {group_name}')
+    ax.set_xticks(x + width * (num_groups - 1) / 2)
+    ax.set_xticklabels([f'Q{q}' for q in questions], rotation=90)
+    ax.legend()
 
-	fig.tight_layout()
-	plt.savefig(filename)
-	plt.close()
+    fig.tight_layout()
+    plt.savefig(filename)
+    plt.close()
 
 # Plot overall mean accuracy and standard deviation
 plot_overall_mean_and_std_dev(
