@@ -91,9 +91,9 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, group_name, filena
         offset = i * width
         ax.bar(x + offset, combined_means[i], width, label=f'{group_entries[i]}', yerr=combined_stds[i], capsize=5)
 
-    ax.set_xlabel('Question Number', fontsize=20)
-    ax.set_ylabel('Mean Accuracy', fontsize=20)
-    ax.set_title(f'Mean Accuracy of Responses by Gender Identity for Each Question', fontsize=30)
+    ax.set_xlabel('Question Number', fontsize=15)
+    ax.set_ylabel('Mean Accuracy', fontsize=15)
+    ax.set_title(f'Mean Accuracy of Responses by Gender Identity for Each Question', fontsize=20)
     ax.set_xticks(x + width * (num_groups - 1) / 2)
     ax.set_xticklabels([f'Q{q}' for q in questions], rotation=90)
     ax.legend(title="Gender Identity")
