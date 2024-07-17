@@ -2,7 +2,7 @@ import re
 import pandas as pd
 
 # Define file path
-file_path = 'output_file_sequential.txt'
+file_path = 'sequential_outputs.txt'
 
 # Define correct answers
 correct_answers = [

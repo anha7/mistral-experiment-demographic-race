@@ -2,7 +2,7 @@ import re
 import pandas as pd
 
 # Define file path
-file_path = "output_file_separate.txt"
+file_path = "separate_outputs.txt"
 
 # Define correct answers
 correct_answers = [
