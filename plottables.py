@@ -66,6 +66,7 @@ def plot_mean_and_std_dev_per_group(mean_combined, std_combined, mean_separate, 
 	plt.close()
 
 # Function that plots mean accuracy and standard deviation per question per group
+# Assuming calc_group_accuracy_and_std is already defined and available
 def plot_mean_and_std_dev_per_question_per_group(df_combined, group_name, filename):
     group_entries = df_combined[group_name].unique()
     questions = df_combined['Question Number'].unique()
@@ -81,23 +82,22 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, group_name, filena
 
     num_questions = len(questions)
     num_groups = len(group_entries)
-    total_bars = num_questions
 
-    x = np.arange(total_bars)
-    width = 0.25
+    x = np.arange(num_questions)
+    width = 0.2  # Adjusted width for better spacing
 
-    fig, ax = plt.subplots(figsize=(30, 15))
+    fig, ax = plt.subplots(figsize=(40, 20))  # Increased figure size
 
     for i in range(num_groups):
         offset = i * width
         ax.bar(x + offset, combined_means[i], width, label=f'Combined, {group_name} {group_entries[i]}', yerr=combined_stds[i], capsize=5)
 
-    ax.set_xlabel('Question Number')
-    ax.set_ylabel('Mean Accuracy')
-    ax.set_title(f'Mean and Standard Deviation per Question per {group_name}')
+    ax.set_xlabel('Question Number', fontsize=20)
+    ax.set_ylabel('Mean Accuracy', fontsize=20)
+    ax.set_title(f'Mean and Standard Deviation per Question per {group_name}', fontsize=24)
     ax.set_xticks(x + width * (num_groups - 1) / 2)
-    ax.set_xticklabels([f'Q{q}' for q in questions], rotation=90)
-    ax.legend()
+    ax.set_xticklabels([f'Q{q}' for q in questions], rotation=90, fontsize=18)
+    ax.legend(fontsize=16)
 
     fig.tight_layout()
     plt.savefig(filename)
