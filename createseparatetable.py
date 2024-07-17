@@ -43,7 +43,7 @@ def process_file(file_path):
 		content = file.read()
 
 	# Define patterns to recognize the repetition number, role, temperature, and LLM response
-	entry_pattern = re.compile(r'Question:\s*(\d+),\s*Repetition:\s*(\d+),\s*Gender:\s*(\w+-?\w*),\s*Response:\s*\[\/INST\]\s*(.*?)\s*(?=(Question:|$))', re.DOTALL)
+	entry_pattern = re.compile(r'Question:\s*(\d+),\s*Repetition:\s*(\d+),\s*Gender:\s*(\w+-?\w*)\s*Response:\s*\[\/INST\]\s*(.*?)\s*(?=(Question:|$))', re.DOTALL)
 
 	# Find all matches within the contents
 	matches = entry_pattern.findall(content)

@@ -43,7 +43,7 @@ def process_file(file_path):
                 content = file.read()
 
         # Define pattern to recognize each repetition block
-        entry_pattern = re.compile(r'Repetition:\s*(\d+),\s*Gender:\s*(\w+-?\w*),\s*Response:\s*\[\/INST\]\s*(.*?)\s*(?=(Repetition:|$))', re.DOTALL)
+        entry_pattern = re.compile(r'Repetition:\s*(\d+),\s*Gender:\s*(\w+-?\w*)\s*Response:\s*\[\/INST\]\s*(.*?)\s*(?=(Repetition:|$))', re.DOTALL)
         matches = entry_pattern.findall(content)
 
         # Process each repetition block
