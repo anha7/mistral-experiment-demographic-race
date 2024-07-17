@@ -12,7 +12,7 @@ model = AutoModelForCausalLM.from_pretrained(saved_dir)
 
 # Read command-line arguments
 question_file = "fall2022questions.txt"
-gender = sys.argv[1]
+race = sys.argv[1]
 repetition = int(sys.argv[2])
 
 # Retrieve questions list
@@ -27,7 +27,7 @@ combined_questions = "\n".join(numbered_questions)
 
 # Prepare initial message and combined user questions
 messages = [
-    {"role": "user", "content": "Create a character of a college first-year student in an introductory computer science class taught in Java. This student identifies as " + str(gender) + ". As this character, answer the following evaluation of 25 questions, providing only the correct answer with no explanation."},
+    {"role": "user", "content": "Create a character of a college first-year student in an introductory computer science class taught in Java. This student's race is " + str(race) + ". As this character, answer the following evaluation of 25 questions, providing ONLY the correct answer with no other details or explanation. Please provide your 25 answers in a numbered list, with each answer separated by a new line."},
     {"role": "assistant", "content": "Sure, I will create this character and answer as this student. What questions do you have?"},
     {"role": "user", "content": combined_questions + "\n<END>"}
 ]
@@ -50,5 +50,5 @@ start_index = decoded.find("<END>") + len("<END>")
 response = decoded[start_index:].strip()
 
 # Print the response
-print(f"Repetition: {repetition}, Gender: {gender}")
+print(f"Repetition: {repetition}, Race: {race}")
 print(f"Response: {response}\n\n\n")

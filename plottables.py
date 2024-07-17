@@ -29,10 +29,10 @@ mean_per_question_combined, std_per_question_combined = calc_group_accuracy_and_
 mean_per_question_separate, std_per_question_separate = calc_group_accuracy_and_std(separate_table, 'Question Number')
 mean_per_question_sequential, std_per_question_sequential = calc_group_accuracy_and_std(sequential_table, 'Question Number')
 
-# Calculate per gender metrics
-mean_per_gender_combined, std_per_gender_combined = calc_group_accuracy_and_std(combined_table, 'Gender')
-mean_per_gender_separate, std_per_gender_separate = calc_group_accuracy_and_std(separate_table, 'Gender')
-mean_per_gender_sequential, std_per_gender_sequential = calc_group_accuracy_and_std(sequential_table, 'Gender')
+# Calculate per race metrics
+mean_per_race_combined, std_per_race_combined = calc_group_accuracy_and_std(combined_table, 'Race')
+mean_per_race_separate, std_per_race_separate = calc_group_accuracy_and_std(separate_table, 'Race')
+mean_per_race_sequential, std_per_race_sequential = calc_group_accuracy_and_std(sequential_table, 'Race')
 
 # Function that plots overall accuracy and standard deviations
 def plot_overall_mean_and_std_dev(overall, separate, sequential, filename):
@@ -93,7 +93,7 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, group_name, filena
 
     ax.set_xlabel('Question Number', fontsize=15)
     ax.set_ylabel('Mean Accuracy', fontsize=15)
-    ax.set_title(f'Mean Accuracy of LLM-Generated Responses Based on Gender Identity for Each Question', fontsize=20)
+    ax.set_title(f'Mean Accuracy and Standard Deviation per Question per {group_name}', fontsize=20)
     ax.set_xticks(x + width * (num_groups - 1) / 2)
     ax.set_xticklabels([f'{q}' for q in questions], rotation=90)
     ax.legend(title="Gender Identity")
@@ -119,18 +119,18 @@ plot_mean_and_std_dev_per_group(
 	'mean_and_std_dev_per_question.png'
 )
 
-# Plot mean accuracy and standard deviation per gender
+# Plot mean accuracy and standard deviation per race
 plot_mean_and_std_dev_per_group(
-	mean_per_gender_combined, std_per_gender_combined,
-	mean_per_gender_separate, std_per_gender_separate,
-	mean_per_gender_sequential, std_per_gender_sequential,
+	mean_per_race_combined, std_per_race_combined,
+	mean_per_race_separate, std_per_race_separate,
+	mean_per_race_sequential, std_per_race_sequential,
 	'Gender',
-	'mean_and_std_dev_per_gender.png'
+	'mean_and_std_dev_per_race.png'
 )
 
-# Plot mean accuracies and std devs for every individual question per gender
+# Plot mean accuracies and std devs for every individual question per race
 plot_mean_and_std_dev_per_question_per_group(
 	combined_table,
-	'Gender',
-	'mean_and_std_dev_per_question_per_gender.png'
+	'Race',
+	'mean_and_std_dev_per_question_per_race.png'
 )

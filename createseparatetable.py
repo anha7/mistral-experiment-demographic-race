@@ -16,11 +16,11 @@ correct_answers = [
 	"False",
 	"True",
 	"False",
-	"Yes",
-	"No",
-	"No",
-	"Yes",
-	"No",
+	"True",
+	"False",
+	"False",
+	"True",
+	"False",
 	"True",
 	"False",
 	"True",
@@ -43,7 +43,7 @@ def process_file(file_path):
 		content = file.read()
 
 	# Define patterns to recognize the repetition number, role, temperature, and LLM response
-	entry_pattern = re.compile(r'Question:\s*(\d+),\s*Repetition:\s*(\d+),\s*Gender:\s*(\w+-?\w*)\s*Response:\s*\[\/INST\]\s*(.*?)\s*(?=(Question:|$))', re.DOTALL)
+	entry_pattern = re.compile(r'Question:\s*(\d+),\s*Repetition:\s*(\d+),\s*Race:\s*([\w\s]*)\s*Response:\s*\[\/INST\]\s*(.*?)\s*(?=(Question:|$))', re.DOTALL)
 
 	# Find all matches within the contents
 	matches = entry_pattern.findall(content)
@@ -51,7 +51,7 @@ def process_file(file_path):
 	for match in matches:
 		question_number = int(match[0])
 		repetition = int(match[1])
-		gender = match[2]
+		race = match[2]
 		llm_output = match[3].strip()
 
 		# Check if LLM answered question correctly
@@ -62,14 +62,14 @@ def process_file(file_path):
 			accuracy = 'Incorrect'
 
 		# Tabulate all data
-		data.append([question_number, gender, llm_output, accuracy, repetition])
+		data.append([question_number, race, llm_output, accuracy, repetition])
 
 
 # Loop through each question and process the corresponding file
 process_file(file_path)
 
 # Create a DataFrame
-df1 = pd.DataFrame(data=data, columns=['Question Number', 'Gender', 'LLM Output', 'Is Correct', 'Repetition Number'])
+df1 = pd.DataFrame(data=data, columns=['Question Number', 'Race', 'LLM Output', 'Is Correct', 'Repetition Number'])
 
 # Save the DataFrame to an Excel file
 output_file = 'separate_table.xlsx'
