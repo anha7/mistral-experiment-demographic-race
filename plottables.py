@@ -85,7 +85,7 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, group_name, filena
     x = np.arange(num_questions)
     width = 0.1  # Adjusted width for better spacing
 
-    fig, ax = plt.subplots(figsize=(50, 30))  # Increased figure size
+    fig, ax = plt.subplots(figsize=(20, 10))  # Increased figure size
 
     for i in range(num_groups):
         offset = i * width
