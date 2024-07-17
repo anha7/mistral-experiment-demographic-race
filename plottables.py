@@ -95,7 +95,7 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, group_name, filena
     ax.set_ylabel('Mean Accuracy', fontsize=15)
     ax.set_title(f'Mean Accuracy of LLM-Generated Responses Based on Gender Identity for Each Question', fontsize=20)
     ax.set_xticks(x + width * (num_groups - 1) / 2)
-    ax.set_xticklabels([f'Q{q}' for q in questions], rotation=90)
+    ax.set_xticklabels([f'{q}' for q in questions], rotation=90)
     ax.legend(title="Gender Identity")
 
     fig.tight_layout()
