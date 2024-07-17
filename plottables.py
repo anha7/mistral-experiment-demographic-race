@@ -85,7 +85,7 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, group_name, filena
     x = np.arange(num_questions)
     width = 0.1  # Adjusted width for better spacing
 
-    fig, ax = plt.subplots(figsize=(60, 30))  # Increased figure size
+    fig, ax = plt.subplots(figsize=(50, 30))  # Increased figure size
 
     for i in range(num_groups):
         offset = i * width
@@ -96,7 +96,8 @@ def plot_mean_and_std_dev_per_question_per_group(df_combined, group_name, filena
     ax.set_title(f'Mean Accuracy of Responses by Gender Identity for Each Question', fontsize=30)
     ax.set_xticks(x + width * (num_groups - 1) / 2)
     ax.set_xticklabels([f'Q{q}' for q in questions], rotation=90, fontsize=20)
-    ax.legend(title="Gender Identity", fontsize=20)
+    legend = ax.legend(title="Gender Identity", fontsize=20)
+    plt.setp(legend.get_title(), fontsize=20)
 
     fig.tight_layout()
     plt.savefig(filename)
