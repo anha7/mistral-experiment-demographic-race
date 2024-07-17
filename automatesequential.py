@@ -26,7 +26,7 @@ module load anaconda3/2024.2
 conda activate /home/ak3987/.conda/envs/mixtral_env
 cd /scratch/network/ak3987/mixtral_experiment_demographic_gender
 
-python testsequential.py {gender} {i} >> sequential_ouputs.txt"""
+python testsequential.py {gender} {i} >> sequential_outputs.txt"""
 
 		# Write SLURM script to a file
 		slurm_filename = f"question.slurm"
