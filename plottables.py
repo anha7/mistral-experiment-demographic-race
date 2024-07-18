@@ -124,7 +124,7 @@ plot_mean_and_std_dev_per_group(
 	mean_per_race_combined, std_per_race_combined,
 	mean_per_race_separate, std_per_race_separate,
 	mean_per_race_sequential, std_per_race_sequential,
-	'Gender',
+	'Race',
 	'mean_and_std_dev_per_race.png'
 )
 
