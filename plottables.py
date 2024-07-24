@@ -56,7 +56,7 @@ def plot_mean_and_std_dev_per_group(mean_combined, std_combined, mean_separate, 
 
 	ax.set_xlabel(group_name)
 	ax.set_ylabel('Mean and Standard Deviation')
-	ax.set_title(f'Mean and Standard Deviation per {group_name}')
+	ax.set_title(f'Mean Accuracy of LLM-Generated Responses Based on {group_name}')
 	ax.set_xticks(x)
 	ax.set_xticklabels(mean_combined.index)
 	ax.legend()
